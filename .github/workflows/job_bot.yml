@@ -22,7 +22,7 @@ jobs:
         run: bundle install
 
       - name: Run Bot
-        run: ruby weather_slack_bot.rb
+        run: ruby job_bot.rb
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
