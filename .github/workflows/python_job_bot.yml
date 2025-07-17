@@ -22,9 +22,7 @@ jobs:
         run: bundle install
 
       - name: Run Bot
-        run: ruby job_bot.rb
+        run: ruby python_job_bot.rb
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          CITY: ${{ secrets.CITY }}
-          COUNTRY: ${{ secrets.COUNTRY }}
+          PYTHON_SLACK_WEBHOOK_URL: ${{ secrets.PYTHON_SLACK_WEBHOOK_URL }}

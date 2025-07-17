@@ -4,12 +4,14 @@ require 'dotenv/load'
 require 'date'
 require 'byebug'
 
-class JobBot
+class PythonJobBot
   def run
     api_key   = ENV['OPENROUTER_API_KEY']
-    slack_url = ENV['SLACK_WEBHOOK_URL']
+    slack_url = ENV['PYTHON_SLACK_WEBHOOK_URL']
 
-    question = 'Search and list 5 active current remote job postings for Ruby on Rails from Google. Include the job title, company name, location and link for each listing.'
+    date = Date.today.strftime('%B %d, %Y')
+
+    question = "Search Google for 5 currently active remote job postings as of #{date} that require experience with Python, specifically Django or FastAPI. For each listing, include the job title, company name, location (if specified), and a direct link to the job posting."
 
     response = HTTParty.post(
       'https://openrouter.ai/api/v1/chat/completions',
@@ -29,10 +31,10 @@ class JobBot
 
     HTTParty.post(
       slack_url,
-      body: { text: "☀️ Good morning!\n#{answer}" }.to_json,
+      body: { text: "*Remote Python Jobs!*\n#{answer}" }.to_json,
       headers: { 'Content-Type' => 'application/json' }
     )
   end
 end
 
-JobBot.new.run
+PythonJobBot.new.run
